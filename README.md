@@ -1,6 +1,7 @@
 # Blesmol Storage Monitor
 
 Blesmol is a free (beer and speech) and open source storage monitor and SMTP based alert system for Windows.
+![Alt text](blesmol.jpg?raw=true "Blesmol")
 
 Requests or contributions are welcomed appreciated. 
 
