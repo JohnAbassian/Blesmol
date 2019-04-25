@@ -24,7 +24,6 @@
 		/// </summary>
 		private void InitializeComponent() {
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.panelHeader = new System.Windows.Forms.Panel();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.labelTitle = new System.Windows.Forms.Label();
@@ -38,8 +37,7 @@
 			this.cboUnit = new System.Windows.Forms.ComboBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.panelEmail = new System.Windows.Forms.Panel();
-			this.dgEmailAddresses = new System.Windows.Forms.DataGridView();
-			this.EmailAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.txtEmails = new System.Windows.Forms.TextBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.panelOptions = new System.Windows.Forms.Panel();
 			this.lblSleepInterval = new System.Windows.Forms.Label();
@@ -59,12 +57,12 @@
 			this.label4 = new System.Windows.Forms.Label();
 			this.txtSendFrom = new System.Windows.Forms.TextBox();
 			this.label3 = new System.Windows.Forms.Label();
+			this.btnSave = new System.Windows.Forms.Button();
 			this.panelHeader.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.panelViewControls.SuspendLayout();
 			this.panelDisks.SuspendLayout();
 			this.panelEmail.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dgEmailAddresses)).BeginInit();
 			this.panelOptions.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -104,6 +102,7 @@
 			// panelViewControls
 			// 
 			this.panelViewControls.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(161)))), ((int)(((byte)(161)))), ((int)(((byte)(161)))));
+			this.panelViewControls.Controls.Add(this.btnSave);
 			this.panelViewControls.Controls.Add(this.btnOptions);
 			this.panelViewControls.Controls.Add(this.btnEmail);
 			this.panelViewControls.Controls.Add(this.btnDisks);
@@ -185,8 +184,7 @@
             "GB",
             "MB",
             "KB",
-			"%"
-			});
+            "%"});
 			this.cboUnit.Location = new System.Drawing.Point(252, 204);
 			this.cboUnit.MaxDropDownItems = 3;
 			this.cboUnit.Name = "cboUnit";
@@ -205,55 +203,29 @@
 			// 
 			// panelEmail
 			// 
-			this.panelEmail.Controls.Add(this.dgEmailAddresses);
+			this.panelEmail.Controls.Add(this.txtEmails);
 			this.panelEmail.Controls.Add(this.label2);
 			this.panelEmail.Location = new System.Drawing.Point(615, 83);
 			this.panelEmail.Name = "panelEmail";
 			this.panelEmail.Size = new System.Drawing.Size(306, 189);
 			this.panelEmail.TabIndex = 6;
 			// 
-			// dgEmailAddresses
+			// txtEmails
 			// 
-			this.dgEmailAddresses.AllowUserToResizeColumns = false;
-			this.dgEmailAddresses.AllowUserToResizeRows = false;
-			dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(243)))), ((int)(((byte)(254)))));
-			this.dgEmailAddresses.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
-			this.dgEmailAddresses.BackgroundColor = System.Drawing.SystemColors.MenuBar;
-			this.dgEmailAddresses.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.dgEmailAddresses.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-			this.dgEmailAddresses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dgEmailAddresses.ColumnHeadersVisible = false;
-			this.dgEmailAddresses.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.EmailAddress});
-			this.dgEmailAddresses.Location = new System.Drawing.Point(13, 24);
-			this.dgEmailAddresses.Name = "dgEmailAddresses";
-			this.dgEmailAddresses.RowHeadersVisible = false;
-			this.dgEmailAddresses.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.dgEmailAddresses.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dgEmailAddresses.ShowCellErrors = false;
-			this.dgEmailAddresses.ShowCellToolTips = false;
-			this.dgEmailAddresses.ShowEditingIcon = false;
-			this.dgEmailAddresses.ShowRowErrors = false;
-			this.dgEmailAddresses.Size = new System.Drawing.Size(279, 151);
-			this.dgEmailAddresses.TabIndex = 6;
-			this.dgEmailAddresses.CurrentCellChanged += new System.EventHandler(this.dgEmailAddresses_CurrentCellChanged);
-			this.dgEmailAddresses.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dgEmailAddresses_RowStateChanged);
-			// 
-			// EmailAddress
-			// 
-			this.EmailAddress.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.EmailAddress.HeaderText = "Email Address";
-			this.EmailAddress.MaxInputLength = 500;
-			this.EmailAddress.Name = "EmailAddress";
+			this.txtEmails.Location = new System.Drawing.Point(13, 25);
+			this.txtEmails.Multiline = true;
+			this.txtEmails.Name = "txtEmails";
+			this.txtEmails.Size = new System.Drawing.Size(280, 146);
+			this.txtEmails.TabIndex = 2;
 			// 
 			// label2
 			// 
 			this.label2.AutoSize = true;
 			this.label2.Location = new System.Drawing.Point(9, 8);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(144, 13);
+			this.label2.Size = new System.Drawing.Size(237, 13);
 			this.label2.TabIndex = 1;
-			this.label2.Text = "Notify these email addresses:";
+			this.label2.Text = "Notify these email addresses: (comma seperated)";
 			// 
 			// panelOptions
 			// 
@@ -424,6 +396,16 @@
 			this.label3.TabIndex = 2;
 			this.label3.Text = "Alerts are sent from this email address:";
 			// 
+			// btnSave
+			// 
+			this.btnSave.Location = new System.Drawing.Point(217, 6);
+			this.btnSave.Name = "btnSave";
+			this.btnSave.Size = new System.Drawing.Size(75, 23);
+			this.btnSave.TabIndex = 3;
+			this.btnSave.Text = "Save";
+			this.btnSave.UseVisualStyleBackColor = true;
+			this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
+			// 
 			// FrmMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -450,7 +432,6 @@
 			this.panelDisks.PerformLayout();
 			this.panelEmail.ResumeLayout(false);
 			this.panelEmail.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dgEmailAddresses)).EndInit();
 			this.panelOptions.ResumeLayout(false);
 			this.panelOptions.PerformLayout();
 			this.ResumeLayout(false);
@@ -470,9 +451,7 @@
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.CheckedListBox clbDisks;
 		private System.Windows.Forms.Panel panelEmail;
-		private System.Windows.Forms.DataGridView dgEmailAddresses;
 		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.DataGridViewTextBoxColumn EmailAddress;
 		private System.Windows.Forms.Panel panelOptions;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.TextBox txtSendFrom;
@@ -493,6 +472,8 @@
 		private System.Windows.Forms.TextBox txtSleepInterval;
 		private System.Windows.Forms.Label lblSleepInterval;
 		private System.Windows.Forms.PictureBox pictureBox1;
+		private System.Windows.Forms.TextBox txtEmails;
+		private System.Windows.Forms.Button btnSave;
 	}
 }
 

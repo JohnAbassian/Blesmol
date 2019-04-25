@@ -11,7 +11,7 @@ namespace Blesmol {
 		private readonly Config c = new Config();
 		private DateTime? _DoNotSendUntilAfter;
 		private Thread _WorkerThread;
-		private List<DriveStatus> AlertingDrives = new List<DriveStatus>();
+		private readonly List<DriveStatus> AlertingDrives = new List<DriveStatus>();
 
 		public Core() {
 			InitializeComponent();

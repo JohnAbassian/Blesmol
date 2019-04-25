@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.ServiceProcess;
 using System.Threading;
 using System.Windows.Forms;
@@ -36,19 +38,19 @@ namespace Blesmol {
 			foreach (DriveInfo dirInfo in DriveInfo.GetDrives()) {
 				if (dirInfo.IsReady) {
 					String DriveLabel = dirInfo.Name.Replace(@"\", "") + " " + AppendLabel(dirInfo.VolumeLabel);
-					
-					String AppendLabel(String volumeLabel){
-						if (String.IsNullOrEmpty(volumeLabel)){
+
+					String AppendLabel(String volumeLabel) {
+						if (String.IsNullOrEmpty(volumeLabel)) {
 							switch (dirInfo.DriveType) {
-								case DriveType.Fixed:
-									return "Local Disk";
-								case DriveType.Removable:
-								case DriveType.CDRom:
-									return "Removable Disk";								
-								case DriveType.Network:
-									return "Networked Disk";									
-								default:
-									return "Unknown Disk";									
+							case DriveType.Fixed:
+								return "Local Disk";
+							case DriveType.Removable:
+							case DriveType.CDRom:
+								return "Removable Disk";
+							case DriveType.Network:
+								return "Networked Disk";
+							default:
+								return "Unknown Disk";
 							}
 						}
 						return volumeLabel;
@@ -89,7 +91,7 @@ namespace Blesmol {
 				key?.DeleteSubKeyTree("Disks");
 			}
 
-			foreach (String i in clbDisks.CheckedItems){
+			foreach (String i in clbDisks.CheckedItems) {
 				key = Registry.LocalMachine.CreateSubKey(_RegistryRoot + @"\Disks");
 				key?.SetValue(i.Substring(i.IndexOf("(", StringComparison.Ordinal) + 1, 1), "1");
 			}
@@ -110,19 +112,11 @@ namespace Blesmol {
 		}
 
 		public void SaveEmailAddresses() {
-			String emailAddresses = "";
-
-			foreach (DataGridViewRow dr in dgEmailAddresses.Rows) {
-				if (dr.Cells[0].Value != null) {
-					emailAddresses += dr.Cells[0].Value.ToString() + ";";
-				}
-			}
-
 			RegistryKey key = Registry.LocalMachine.CreateSubKey(_RegistryRoot);
-			if (!String.IsNullOrEmpty(emailAddresses)) {
-				emailAddresses = emailAddresses.Substring(0, emailAddresses.Length - 1);
-				key?.SetValue("EmailAddresses", emailAddresses);
-			}
+			
+			//';' is an acceptable (and used in stored setting) separator for backwards compatibility...
+			key?.SetValue("EmailAddresses", txtEmails.Text.Replace(',', ';'));
+
 		}
 
 		private void SaveEmailOptions() {
@@ -159,7 +153,7 @@ namespace Blesmol {
 			}
 
 			key = Registry.LocalMachine.CreateSubKey(_RegistryRoot + @"\Threshold");
-			
+
 			if (key != null) {
 				txtAmount.Text = key.GetValue("Amount", "0").ToString();
 				cboUnit.SelectedIndex = cboUnit.FindStringExact(key.GetValue("Unit", "GB").ToString());
@@ -171,16 +165,11 @@ namespace Blesmol {
 			txtSleepInterval.Text = Registry.LocalMachine.CreateSubKey(_RegistryRoot + @"\SleepInterval")?.GetValue("SleepInterval", "5").ToString();
 
 			key = Registry.LocalMachine.OpenSubKey(_RegistryRoot);
-			String[] EmailAddresses = key.GetValue("EmailAddresses", "").ToString().Split(char.Parse(";"));
-			foreach (String s in EmailAddresses) {
-				if (!String.IsNullOrEmpty(s)) {
-					DataGridViewRow dr = new DataGridViewRow();
-					dgEmailAddresses.Rows.Add(s);
-				}
-			}
+			//';' is an acceptable (and used in stored setting) separator for backwards compatibility...
+			txtEmails.Text = key?.GetValue("EmailAddresses", "").ToString().Replace(';', ',') ?? "";
 
 			key = Registry.LocalMachine.OpenSubKey(_RegistryRoot);
-			
+
 			String sMachineName = String.IsNullOrEmpty(key?.GetValue("MachineName", "").ToString()) ? System.Windows.Forms.SystemInformation.ComputerName : key.GetValue("MachineName", "").ToString();
 
 			String sSmtpServer = String.IsNullOrEmpty(key?.GetValue("SmtpServer", "").ToString()) ? "127.0.0.1" : key.GetValue("SmtpServer", "").ToString();
@@ -193,7 +182,7 @@ namespace Blesmol {
 
 			String sSmtpServerPassword = String.IsNullOrEmpty(key?.GetValue("SmtpServerPassword", "").ToString()) ? "" : key.GetValue("SmtpServerPassword", "").ToString();
 
-			String sEmailDelay = String.IsNullOrEmpty(key? .GetValue("EmailDelay", "").ToString()) ? "45" : key.GetValue("EmailDelay", "").ToString();
+			String sEmailDelay = String.IsNullOrEmpty(key?.GetValue("EmailDelay", "").ToString()) ? "45" : key.GetValue("EmailDelay", "").ToString();
 
 			txtMachineName.Text = sMachineName;
 			txtSmtpServer.Text = sSmtpServer;
@@ -294,7 +283,7 @@ namespace Blesmol {
 		private void txtEmailDelay_TextChanged(object sender, EventArgs e) {
 			SaveEmailOptions();
 		}
-		
+
 		private void cboUnit_SelectedIndexChanged(object sender, EventArgs e) {
 			SaveAlertSettings();
 		}
@@ -305,6 +294,11 @@ namespace Blesmol {
 
 		private void TxtSleepInterval_TextChanged(Object sender, EventArgs e) {
 			SaveAlertSettings();
+		}
+
+		private void BtnSave_Click(Object sender, EventArgs e) {
+			SaveAllSettings();
+			RestartService();
 		}
 	}
 }
