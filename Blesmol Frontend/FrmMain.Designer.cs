@@ -23,8 +23,10 @@
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.panelHeader = new System.Windows.Forms.Panel();
+			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.labelTitle = new System.Windows.Forms.Label();
 			this.panelViewControls = new System.Windows.Forms.Panel();
 			this.btnOptions = new System.Windows.Forms.Button();
@@ -41,7 +43,6 @@
 			this.label2 = new System.Windows.Forms.Label();
 			this.panelOptions = new System.Windows.Forms.Panel();
 			this.lblSleepInterval = new System.Windows.Forms.Label();
-			this.label11 = new System.Windows.Forms.Label();
 			this.txtSleepInterval = new System.Windows.Forms.TextBox();
 			this.label10 = new System.Windows.Forms.Label();
 			this.label9 = new System.Windows.Forms.Label();
@@ -59,6 +60,7 @@
 			this.txtSendFrom = new System.Windows.Forms.TextBox();
 			this.label3 = new System.Windows.Forms.Label();
 			this.panelHeader.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.panelViewControls.SuspendLayout();
 			this.panelDisks.SuspendLayout();
 			this.panelEmail.SuspendLayout();
@@ -71,18 +73,29 @@
 			this.panelHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.panelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(67)))), ((int)(((byte)(70)))));
+			this.panelHeader.Controls.Add(this.pictureBox1);
 			this.panelHeader.Controls.Add(this.labelTitle);
-			this.panelHeader.Location = new System.Drawing.Point(1, 0);
+			this.panelHeader.Location = new System.Drawing.Point(0, 0);
 			this.panelHeader.Name = "panelHeader";
-			this.panelHeader.Size = new System.Drawing.Size(654, 47);
+			this.panelHeader.Size = new System.Drawing.Size(1228, 47);
 			this.panelHeader.TabIndex = 1;
+			// 
+			// pictureBox1
+			// 
+			this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+			this.pictureBox1.Location = new System.Drawing.Point(-3, -8);
+			this.pictureBox1.Name = "pictureBox1";
+			this.pictureBox1.Size = new System.Drawing.Size(62, 57);
+			this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.pictureBox1.TabIndex = 1;
+			this.pictureBox1.TabStop = false;
 			// 
 			// labelTitle
 			// 
 			this.labelTitle.AutoSize = true;
 			this.labelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.labelTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(201)))), ((int)(((byte)(227)))));
-			this.labelTitle.Location = new System.Drawing.Point(7, 13);
+			this.labelTitle.Location = new System.Drawing.Point(56, 12);
 			this.labelTitle.Name = "labelTitle";
 			this.labelTitle.Size = new System.Drawing.Size(238, 24);
 			this.labelTitle.TabIndex = 0;
@@ -171,7 +184,9 @@
             "TB",
             "GB",
             "MB",
-            "KB"});
+            "KB",
+			"%"
+			});
 			this.cboUnit.Location = new System.Drawing.Point(252, 204);
 			this.cboUnit.MaxDropDownItems = 3;
 			this.cboUnit.Name = "cboUnit";
@@ -192,7 +207,7 @@
 			// 
 			this.panelEmail.Controls.Add(this.dgEmailAddresses);
 			this.panelEmail.Controls.Add(this.label2);
-			this.panelEmail.Location = new System.Drawing.Point(321, 83);
+			this.panelEmail.Location = new System.Drawing.Point(615, 83);
 			this.panelEmail.Name = "panelEmail";
 			this.panelEmail.Size = new System.Drawing.Size(306, 189);
 			this.panelEmail.TabIndex = 6;
@@ -243,7 +258,6 @@
 			// panelOptions
 			// 
 			this.panelOptions.Controls.Add(this.lblSleepInterval);
-			this.panelOptions.Controls.Add(this.label11);
 			this.panelOptions.Controls.Add(this.txtSleepInterval);
 			this.panelOptions.Controls.Add(this.label10);
 			this.panelOptions.Controls.Add(this.label9);
@@ -260,7 +274,7 @@
 			this.panelOptions.Controls.Add(this.label4);
 			this.panelOptions.Controls.Add(this.txtSendFrom);
 			this.panelOptions.Controls.Add(this.label3);
-			this.panelOptions.Location = new System.Drawing.Point(321, 287);
+			this.panelOptions.Location = new System.Drawing.Point(628, 358);
 			this.panelOptions.Name = "panelOptions";
 			this.panelOptions.Size = new System.Drawing.Size(306, 239);
 			this.panelOptions.TabIndex = 7;
@@ -273,15 +287,6 @@
 			this.lblSleepInterval.Size = new System.Drawing.Size(117, 13);
 			this.lblSleepInterval.TabIndex = 19;
 			this.lblSleepInterval.Text = "Sleep Interval (minutes)";
-			// 
-			// label11
-			// 
-			this.label11.AutoSize = true;
-			this.label11.Location = new System.Drawing.Point(0, 0);
-			this.label11.Name = "label11";
-			this.label11.Size = new System.Drawing.Size(41, 13);
-			this.label11.TabIndex = 18;
-			this.label11.Text = "label11";
 			// 
 			// txtSleepInterval
 			// 
@@ -423,13 +428,14 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(654, 538);
+			this.ClientSize = new System.Drawing.Size(1228, 670);
 			this.Controls.Add(this.panelOptions);
 			this.Controls.Add(this.panelEmail);
 			this.Controls.Add(this.panelDisks);
 			this.Controls.Add(this.panelViewControls);
 			this.Controls.Add(this.panelHeader);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "FrmMain";
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -438,6 +444,7 @@
 			this.Load += new System.EventHandler(this.FrmMain_Load);
 			this.panelHeader.ResumeLayout(false);
 			this.panelHeader.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.panelViewControls.ResumeLayout(false);
 			this.panelDisks.ResumeLayout(false);
 			this.panelDisks.PerformLayout();
@@ -485,7 +492,7 @@
 		private System.Windows.Forms.TextBox txtAmount;
 		private System.Windows.Forms.TextBox txtSleepInterval;
 		private System.Windows.Forms.Label lblSleepInterval;
-		private System.Windows.Forms.Label label11;
+		private System.Windows.Forms.PictureBox pictureBox1;
 	}
 }
 

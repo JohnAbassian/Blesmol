@@ -20,7 +20,7 @@ namespace Blesmol {
 		}
 
 		private void FrmMain_Load(object sender, EventArgs e) {
-			Size = new System.Drawing.Size(311, 350);
+			Size = new System.Drawing.Size(320, 370);
 			CenterToScreen();
 		}
 
@@ -140,7 +140,7 @@ namespace Blesmol {
 			}
 
 			try {
-				int mailDelay = Convert.ToInt32(txtEmailDelay.Text);
+				Int32 mailDelay = Convert.ToInt32(txtEmailDelay.Text);
 				key.SetValue("EmailDelay", txtEmailDelay.Text);
 			} catch {
 				key.SetValue("EmailDelay", "45");
