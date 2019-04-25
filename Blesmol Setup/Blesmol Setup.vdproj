@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_29A0455695A047E88A7BF75D4D2C9945"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_9E82699D6C47455B9B6549E78C9A1CB6"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -62,6 +68,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
             }
         }
         "Release"
@@ -138,6 +152,26 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_29A0455695A047E88A7BF75D4D2C9945"
+            {
+            "SourcePath" = "8:..\\blesmol.ico"
+            "TargetName" = "8:blesmol.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_730D0CAAC00844529C311A965F6F9357"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
         }
         "FileType"
         {
@@ -195,7 +229,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Blesmol Storage Monitor"
         "ProductCode" = "8:{3ED882B3-4119-48A6-A751-D4F43054EB7C}"
-        "PackageCode" = "8:{49E8308C-F01F-47D6-B73A-9147F5C53DFC}"
+        "PackageCode" = "8:{D545D7B0-5B6C-49D3-B9EA-8F4910623A7F}"
         "UpgradeCode" = "8:{933E8D9C-A303-464A-85BD-CFAF1532C16F}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -326,7 +360,7 @@
             "Target" = "8:_EE0B25CC46514DB2BF751A9398B1A42D"
             "Folder" = "8:_06BC9004D6204DFDB1A81F6F4076C77A"
             "WorkingFolder" = "8:_730D0CAAC00844529C311A965F6F9357"
-            "Icon" = "8:"
+            "Icon" = "8:_29A0455695A047E88A7BF75D4D2C9945"
             "Feature" = "8:"
             }
         }
@@ -730,7 +764,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_9E82699D6C47455B9B6549E78C9A1CB6"
             {
-            "SourcePath" = "8:..\\Blesmol Service\\obj\\Debug\\Blesmol Service.exe"
+            "SourcePath" = "8:..\\Blesmol Service\\obj\\Release\\Blesmol Service.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_730D0CAAC00844529C311A965F6F9357"
