@@ -1,15 +1,16 @@
-﻿using Microsoft.Win32;
+﻿using Win32 = Microsoft.Win32;
 using System;
+using Blesmol.Core;
 
-namespace Blesmol.Core.RegistrySettings {
+namespace Blesmol.Registry {
 	public abstract class SettingsBase {
 		protected readonly Boolean Writeable;
 		protected readonly SettingsBase Parent;
 		
 		protected abstract String RegistryRoot { get; }
 
-		protected RegistryKey _Key;
-		protected virtual RegistryKey Key => _Key ?? (_Key = (Parent?.Key ?? Registry.LocalMachine).CreateSubKey(RegistryRoot, Writeable));
+		protected Win32.RegistryKey _Key;
+		protected virtual Win32.RegistryKey Key => _Key ?? (_Key = (Parent?.Key ?? Win32.Registry.LocalMachine).CreateSubKey(RegistryRoot, Writeable));
 
 		protected String Get(ref String inner, String name) {
 			if (String.IsNullOrEmpty(inner)) {
@@ -18,8 +19,17 @@ namespace Blesmol.Core.RegistrySettings {
 
 			return inner;
 		}
+
 		protected Int32? Get(ref Int32? inner, String name) {
 			if (inner == null && Int32.TryParse(Key.GetValue(name)?.ToString(), out Int32 value)) {
+				inner = value;
+			}
+
+			return inner;
+		}
+
+		protected Units.Unit Get(ref Units.Unit inner, String name) {
+			if (inner == default && Enum.TryParse(Key.GetValue(name)?.ToString(), out Units.Unit value)) {
 				inner = value;
 			}
 
@@ -105,8 +115,8 @@ namespace Blesmol.Core.RegistrySettings {
 			set => Set(ref _Amount, "Amount", value);
 		}
 
-		private String _Unit;
-		public String Unit {
+		private Units.Unit _Unit;
+		public Units.Unit Unit {
 			get => Get(ref _Unit, "Unit");
 			set => Set(ref _Unit, "Unit", value);
 		}

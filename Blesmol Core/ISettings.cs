@@ -14,7 +14,7 @@ namespace Blesmol.Core {
 
 	public interface IThresholdSettings {
 		Int32? Amount { get; set; }
-		String Unit { get; set; }
+		Units.Unit Unit { get; set; }
 	}
 
 	public interface IEmailSettings {

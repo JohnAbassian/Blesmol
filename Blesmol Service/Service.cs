@@ -3,6 +3,7 @@ using System.IO;
 using System.Net.Mail;
 using System.ServiceProcess;
 using System.Threading;
+using Blesmol.Core;
 
 namespace Blesmol {
 	public partial class Service : ServiceBase {
@@ -37,7 +38,7 @@ namespace Blesmol {
 					foreach (DriveInfo dirInfo in allDrives) {
 						try {
 							if (dirInfo.IsReady && c.DisksToMonitor.Contains(dirInfo.Name.Replace(@":\", "")) == true) {
-								if (dirInfo.TotalFreeSpace < Utils.ConvertToBytes(c.ThresholdAmount, c.ThresholdUnit)) {
+								if (dirInfo.TotalFreeSpace < Units.ConvertToBytes(c.ThresholdAmount, c.ThresholdUnit)) {
 									SendAlerts(dirInfo.Name.Replace(@"\", ""), c.ThresholdAmount.ToString(), c.ThresholdUnit);
 								}
 							}
@@ -51,7 +52,7 @@ namespace Blesmol {
 			}
 		}
 
-		private void SendAlerts(String drive, String thresholdAmount, String thresholdUnit) {
+		private void SendAlerts(String drive, String thresholdAmount, Units.Unit thresholdUnit) {
 			DoNotSendUntilAfter = DateTime.Now.AddMinutes(c.EmailDelay);
 
 			SmtpClient mail = new SmtpClient(c.SmtpServer, Convert.ToInt32(c.SmtpServerPort)) {

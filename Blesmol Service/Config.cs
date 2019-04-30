@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Diagnostics;
 using Blesmol.Core;
-using Blesmol.Core.RegistrySettings;
+using Blesmol.Registry;
 
 namespace Blesmol {
 	public class Config {
@@ -10,7 +10,7 @@ namespace Blesmol {
 		public String[] EmailAddresses;
 		public ArrayList DisksToMonitor = new ArrayList();
 		public Int32 ThresholdAmount;
-		public String ThresholdUnit;
+		public Units.Unit ThresholdUnit;
 		public String SmtpServer;
 		public Int32 SmtpServerPort;
 		public String SmtpServerUsername;

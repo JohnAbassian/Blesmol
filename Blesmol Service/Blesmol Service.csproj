@@ -137,6 +137,10 @@
       <Project>{edba83ab-f842-43de-8ff8-a2b5bad3cf92}</Project>
       <Name>Blesmol Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Blesmol Registry\Blesmol Registry.csproj">
+      <Project>{af2f29d1-6487-4aa3-9873-9e1486adaec2}</Project>
+      <Name>Blesmol Registry</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

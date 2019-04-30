@@ -5,22 +5,24 @@ using System.ServiceProcess;
 using System.Threading;
 using System.Windows.Forms;
 using Blesmol.Core;
-using Blesmol.Core.RegistrySettings;
 
 namespace Blesmol {
 	public partial class FrmMain : Form {
 		private readonly Boolean _FormLoaded = false;
-		private ISettings Settings;
+		private readonly ISettings Settings;
 		private Int32 defaultThresholdAmount = 0;
-		private String defaultThresholdUnit = "GB";
+		private Units.Unit defaultThresholdUnit = Units.Unit.GB;
 		private Int32 defaultSleepInterval = 5;
 		private Int32 defaultAlertInterval = 45;
 		private Int32 defaultSmtpServerPort = 25;
 
-		public FrmMain() {
+		public FrmMain(ISettings settings) {
 			InitializeComponent();
 			GetDrives();
+
+			Settings = settings;
 			LoadSettings();
+
 			_FormLoaded = true;
 		}
 
@@ -53,23 +55,24 @@ namespace Blesmol {
 						return volumeLabel;
 					}
 
-					clbDisks.Items.Add(DriveLabel + "   [" + ConvertBytes(Convert.ToInt64(dirInfo.TotalFreeSpace)) + " free of " + ConvertBytes(Convert.ToInt64(dirInfo.TotalSize)) + "]", false);
+					clbDisks.Items.Add(DriveLabel + "   [" + ConvertBytes(dirInfo.TotalFreeSpace) + " free of " + ConvertBytes(dirInfo.TotalSize) + "]", false);
 				}
 			}
 		}
 
-		public String ConvertBytes(Int64 byteCount) {
-			String size = "0 Bytes";
-			if (byteCount >= 1073741824)
-				size = $"{byteCount / 1073741824:##.##}" + " GB";
-			else if (byteCount >= 1048576)
-				size = $"{byteCount / 1048576:##.##}" + " MB";
-			else if (byteCount >= 1024)
-				size = $"{byteCount / 1024:##.##}" + " KB";
-			else if (byteCount > 0 && byteCount < 1024)
-				size = byteCount.ToString() + " Bytes";
+		private String ConvertBytes(Int64 byteCount) {
+			Units.Unit unit;
 
-			return size;
+			if (byteCount >= (Int64)Units.Unit.GB)
+				unit = Units.Unit.GB;
+			else if (byteCount >= (Int64)Units.Unit.MB)
+				unit = Units.Unit.MB;
+			else if (byteCount >= (Int64)Units.Unit.KB)
+				unit = Units.Unit.KB;
+			else
+				unit = Units.Unit.B;
+
+			return $"{Units.ConvertFromBytes(byteCount, unit):##.##}" + " " + unit;
 		}
 
 		private void SaveAllSettings() {
@@ -94,7 +97,7 @@ namespace Blesmol {
 			if (!_FormLoaded) return;
 
 			Settings.Threshold.Amount = Int32.TryParse(txtAmount.Text, out Int32 amount) ? amount : defaultThresholdAmount;
-			Settings.Threshold.Unit = cboUnit.SelectedItem as String ?? defaultThresholdUnit;
+			Settings.Threshold.Unit = Enum.TryParse(cboUnit.SelectedItem as String, out Units.Unit unit) ? unit : defaultThresholdUnit;
 		}
 
 		public void SaveIntervalSettings() {
@@ -132,8 +135,6 @@ namespace Blesmol {
 		}
 
 		public void LoadSettings() {
-			Settings = new Settings(true);
-
 			if (Settings?.Disks?.Disks != null) {
 				foreach (String k in Settings.Disks.Disks) {
 					if (clbDisks.FindString(k + ":") > -1) {
@@ -143,7 +144,7 @@ namespace Blesmol {
 			}
 
 			txtAmount.Text = (Settings?.Threshold?.Amount ?? defaultThresholdAmount).ToString();
-			cboUnit.SelectedIndex = cboUnit.FindStringExact(Settings.Threshold?.Unit ?? defaultThresholdUnit);
+			cboUnit.SelectedIndex = cboUnit.FindStringExact((Settings.Threshold?.Unit != default ? Settings.Threshold.Unit : defaultThresholdUnit).ToString());
 
 			txtMachineName.Text = coalesceString(Settings?.Email?.MachineName) ?? System.Windows.Forms.SystemInformation.ComputerName;
 			txtSmtpServer.Text = coalesceString(Settings?.Email?.SmtpServer) ?? "127.0.0.1";
