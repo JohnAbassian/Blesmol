@@ -5,12 +5,12 @@ using System.ServiceProcess;
 using System.Threading;
 
 namespace Blesmol {
-	public partial class Core : ServiceBase {
+	public partial class Service : ServiceBase {
 		private readonly Config c = new Config();
 		private DateTime DoNotSendUntilAfter;
 		private Thread WorkerThread;
 
-		public Core() {
+		public Service() {
 			InitializeComponent();
 		}
 
@@ -75,13 +75,13 @@ namespace Blesmol {
 
 		static void Main() {
 #if DEBUG
-			Core DebugService = new Core();
+			Service DebugService = new Service();
 			DebugService.OnStart(null);
 #else
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[] 
 			{ 
-				new Core() 
+				new Service() 
 			};
             ServiceBase.Run(ServicesToRun);
 #endif
