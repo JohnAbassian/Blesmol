@@ -1,23 +1,27 @@
-﻿using System;
+﻿using Blesmol.Core;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.ServiceProcess;
 using System.Threading;
 using System.Windows.Forms;
-using Blesmol.Core;
 
 namespace Blesmol {
 	public partial class FrmMain : Form {
 		private readonly Boolean _FormLoaded = false;
 		private readonly ISettings Settings;
 		private Int32 defaultThresholdAmount = 0;
-		private Units.Unit defaultThresholdUnit = Units.Unit.GB;
+		private Units.Unit defaultThresholdUnit = default;
 		private Int32 defaultSleepInterval = 5;
 		private Int32 defaultAlertInterval = 45;
 		private Int32 defaultSmtpServerPort = 25;
 
 		public FrmMain(ISettings settings) {
 			InitializeComponent();
+			InitializeCboUnit();
 			GetDrives();
 
 			Settings = settings;
@@ -27,13 +31,24 @@ namespace Blesmol {
 		}
 
 		private void FrmMain_Load(object sender, EventArgs e) {
-			Size = new System.Drawing.Size(311, 350);
+			Size = new Size(320, 370);
 			CenterToScreen();
 		}
 
+		private void InitializeCboUnit() {
+			cboUnit.DataSource = Enum.GetValues(typeof(Units.Unit))
+				.Cast<Units.Unit>()
+				.Select(value => new {
+					Description = (value == Units.Unit.Percentage) ? "%" : value.ToString(),
+					Value = value
+				})
+				.OrderBy(unit => unit.Value)
+				.ToList();
+			cboUnit.DisplayMember = "Description";
+			cboUnit.ValueMember = "Value";
+		}
 
-		public void GetDrives() {
-			DriveInfo[] allDrives = DriveInfo.GetDrives();
+		private void GetDrives() {
 			foreach (DriveInfo dirInfo in DriveInfo.GetDrives()) {
 				if (dirInfo.IsReady) {
 					String DriveLabel = dirInfo.Name.Replace(@"\", "") + " " + AppendLabel(dirInfo.VolumeLabel);
@@ -58,30 +73,31 @@ namespace Blesmol {
 					clbDisks.Items.Add(DriveLabel + "   [" + ConvertBytes(dirInfo.TotalFreeSpace) + " free of " + ConvertBytes(dirInfo.TotalSize) + "]", false);
 				}
 			}
-		}
 
-		private String ConvertBytes(Int64 byteCount) {
-			Units.Unit unit;
+			String ConvertBytes(Int64 byteCount) {
+				Units.Unit unit;
 
-			if (byteCount >= (Int64)Units.Unit.GB)
-				unit = Units.Unit.GB;
-			else if (byteCount >= (Int64)Units.Unit.MB)
-				unit = Units.Unit.MB;
-			else if (byteCount >= (Int64)Units.Unit.KB)
-				unit = Units.Unit.KB;
-			else
-				unit = Units.Unit.B;
+				if (byteCount >= (Int64)Units.Unit.GB)
+					unit = Units.Unit.GB;
+				else if (byteCount >= (Int64)Units.Unit.MB)
+					unit = Units.Unit.MB;
+				else if (byteCount >= (Int64)Units.Unit.KB)
+					unit = Units.Unit.KB;
+				else
+					unit = Units.Unit.B;
 
-			return $"{Units.ConvertFromBytes(byteCount, unit):##.##}" + " " + unit;
+				return $"{Units.ConvertFromBytes(byteCount, unit):##.##}" + " " + unit;
+			}
 		}
 
 		private void SaveAllSettings() {
 			SaveDiskSettings();
 			SaveThresholdSettings();
 			SaveEmailSettings();
+			SaveIntervalSettings();
 		}
 
-		public void SaveDiskSettings() {
+		private void SaveDiskSettings() {
 			if (!_FormLoaded) return;
 
 			String[] disks = new String[clbDisks.CheckedItems.Count];
@@ -93,18 +109,11 @@ namespace Blesmol {
 			Settings.Disks.Disks = disks;
 		}
 
-		public void SaveThresholdSettings() {
+		private void SaveThresholdSettings() {
 			if (!_FormLoaded) return;
 
 			Settings.Threshold.Amount = Int32.TryParse(txtAmount.Text, out Int32 amount) ? amount : defaultThresholdAmount;
-			Settings.Threshold.Unit = Enum.TryParse(cboUnit.SelectedItem as String, out Units.Unit unit) ? unit : defaultThresholdUnit;
-		}
-
-		public void SaveIntervalSettings() {
-			if (!_FormLoaded) return;
-
-			Settings.Intervals.Sleep = Int32.TryParse(txtSleepInterval.Text, out Int32 sleep) ? sleep : defaultSleepInterval;
-			Settings.Intervals.Alert = Int32.TryParse(txtEmailDelay.Text, out Int32 alert) ? alert : defaultAlertInterval;
+			Settings.Threshold.Unit = (Units.Unit)cboUnit.SelectedValue;
 		}
 
 		private void SaveEmailSettings() {
@@ -116,25 +125,17 @@ namespace Blesmol {
 			Settings.Email.SmtpServerPassword = txtPassword.Text;
 			Settings.Email.SendFrom = txtSendFrom.Text;
 			Settings.Email.SmtpServerPort = Int32.TryParse(txtPort.Text, out Int32 port) ? port : defaultSmtpServerPort;
-
-			SaveEmailAddresses();
+			Settings.Email.EmailAddresses = txtEmails.Text;
 		}
 
-		public void SaveEmailAddresses() {
-			String emailAddresses = "";
+		private void SaveIntervalSettings() {
+			if (!_FormLoaded) return;
 
-			foreach (DataGridViewRow dr in dgEmailAddresses.Rows) {
-				if (dr.Cells[0].Value is String email) {
-					emailAddresses += email + ";";
-				}
-			}
-
-			if (!String.IsNullOrEmpty(emailAddresses)) {
-				Settings.Email.EmailAddresses = emailAddresses.Substring(0, emailAddresses.Length - 1);
-			}
+			Settings.Intervals.Sleep = Int32.TryParse(txtSleepInterval.Text, out Int32 sleep) ? sleep : defaultSleepInterval;
+			Settings.Intervals.Alert = Int32.TryParse(txtEmailDelay.Text, out Int32 alert) ? alert : defaultAlertInterval;
 		}
 
-		public void LoadSettings() {
+		private void LoadSettings() {
 			if (Settings?.Disks?.Disks != null) {
 				foreach (String k in Settings.Disks.Disks) {
 					if (clbDisks.FindString(k + ":") > -1) {
@@ -144,7 +145,7 @@ namespace Blesmol {
 			}
 
 			txtAmount.Text = (Settings?.Threshold?.Amount ?? defaultThresholdAmount).ToString();
-			cboUnit.SelectedIndex = cboUnit.FindStringExact((Settings.Threshold?.Unit != default ? Settings.Threshold.Unit : defaultThresholdUnit).ToString());
+			cboUnit.SelectedValue = Settings.Threshold?.Unit ?? defaultThresholdUnit;
 
 			txtMachineName.Text = coalesceString(Settings?.Email?.MachineName) ?? System.Windows.Forms.SystemInformation.ComputerName;
 			txtSmtpServer.Text = coalesceString(Settings?.Email?.SmtpServer) ?? "127.0.0.1";
@@ -153,14 +154,8 @@ namespace Blesmol {
 			txtUsername.Text = Settings?.Email?.SmtpServerUsername;
 			txtPassword.Text = Settings?.Email?.SmtpServerPassword;
 
-			if (Settings?.Email?.EmailAddresses != null) {
-				foreach (String s in Settings.Email.EmailAddresses.Split(';')) {
-					if (!String.IsNullOrEmpty(s)) {
-						DataGridViewRow dr = new DataGridViewRow();
-						dgEmailAddresses.Rows.Add(s);
-					}
-				}
-			}
+			//';' is an acceptable (and used in stored setting) separator for backwards compatibility...
+			txtEmails.Text = Settings?.Email?.EmailAddresses?.Replace(';', ',') ?? "";
 
 			txtSleepInterval.Text = (Settings?.Intervals?.Sleep ?? defaultSleepInterval).ToString();
 			txtEmailDelay.Text = (Settings?.Intervals?.Alert ?? defaultAlertInterval).ToString();
@@ -223,14 +218,6 @@ namespace Blesmol {
 			SaveDiskSettings();
 		}
 
-		private void dgEmailAddresses_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e) {
-			SaveEmailAddresses();
-		}
-
-		private void dgEmailAddresses_CurrentCellChanged(object sender, EventArgs e) {
-			SaveEmailAddresses();
-		}
-
 		private void txtSendFrom_TextChanged(object sender, EventArgs e) {
 			SaveEmailSettings();
 		}
@@ -268,7 +255,12 @@ namespace Blesmol {
 		}
 
 		private void TxtSleepInterval_TextChanged(Object sender, EventArgs e) {
-			SaveThresholdSettings();
+			SaveIntervalSettings();
+		}
+
+		private void BtnSave_Click(Object sender, EventArgs e) {
+			SaveAllSettings();
+			RestartService();
 		}
 	}
 }

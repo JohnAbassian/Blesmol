@@ -5,7 +5,7 @@ using System.ServiceProcess;
 
 namespace Blesmol {
 	[RunInstaller(true)]
-	public partial class ProjectInstaller : System.Configuration.Install.Installer {
+	public partial class ProjectInstaller : Installer {
 		public ProjectInstaller() {
 			InitializeComponent();
 		}

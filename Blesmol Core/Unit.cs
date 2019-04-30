@@ -7,6 +7,7 @@ namespace Blesmol.Core {
 		public static Int64 ConvertToBytes(Int64 bytes, Unit unit) => bytes * (Int64)unit;
 
 		public enum Unit : Int64 {
+			Percentage = 0,
 			B = 1,
 			KB = 1024,
 			MB = 1048576,
