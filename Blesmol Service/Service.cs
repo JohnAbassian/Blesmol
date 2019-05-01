@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Mail;
 using System.ServiceProcess;
 using System.Threading;
-using System.Linq;
+using Blesmol.Core;
 
 namespace Blesmol {
-	public partial class Core : ServiceBase {
+	public partial class Service : ServiceBase {
 		private readonly Config c = new Config();
 		private DateTime? _DoNotSendUntilAfter;
 		private Thread _WorkerThread;
 		private readonly List<DriveStatus> AlertingDrives = new List<DriveStatus>();
 
-		public Core() {
+		public Service() {
 			InitializeComponent();
 		}
 
@@ -48,16 +49,16 @@ namespace Blesmol {
 						} catch { }
 					}
 				}
-				System.Threading.Thread.Sleep(System.TimeSpan.FromMinutes(AlertingDrives.Any(x => x.Alerting) ? c.EmailDelay : c.SleepInterval));
+				Thread.Sleep(TimeSpan.FromMinutes(AlertingDrives.Any(x => x.Alerting) ? c.EmailDelay : c.SleepInterval));
 			}
 
-			Boolean ThresholdPassed(long driveSize, long freeSpace, double threshold, String unit) {
-				if (unit == "%") return freeSpace <= (driveSize * (threshold / 100));
-				else return freeSpace < Utils.ConvertToBytes(c.ThresholdAmount, c.ThresholdUnit);
+			Boolean ThresholdPassed(Int64 driveSize, Int64 freeSpace, Double threshold, Units.Unit unit) {
+				if (unit == Units.Unit.Percentage) return freeSpace <= (driveSize * (threshold / 100));
+				else return freeSpace < Units.ConvertToBytes(c.ThresholdAmount, c.ThresholdUnit);
 			}
 		}
 
-		private void SendAlerts(String drive, String thresholdAmount, String thresholdUnit, DateTime eventTime, Boolean cleared) {
+		private void SendAlerts(String drive, String thresholdAmount, Units.Unit thresholdUnit, DateTime eventTime, Boolean cleared) {
 			_DoNotSendUntilAfter = DateTime.Now.AddMinutes(c.EmailDelay);
 
 			SmtpClient mail = new SmtpClient(c.SmtpServer, Convert.ToInt32(c.SmtpServerPort)) {
@@ -96,13 +97,13 @@ namespace Blesmol {
 
 		static void Main() {
 #if DEBUG
-			Core DebugService = new Core();
+			Service DebugService = new Service();
 			DebugService.OnStart(null);
 #else
-			ServiceBase[] ServicesToRun;
-			ServicesToRun = new ServiceBase[]
-			{
-				new Core()
+            ServiceBase[] ServicesToRun;
+            ServicesToRun = new ServiceBase[] 
+			{ 
+				new Service() 
 			};
 			ServiceBase.Run(ServicesToRun);
 #endif

@@ -28,6 +28,7 @@
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.labelTitle = new System.Windows.Forms.Label();
 			this.panelViewControls = new System.Windows.Forms.Panel();
+			this.btnSave = new System.Windows.Forms.Button();
 			this.btnOptions = new System.Windows.Forms.Button();
 			this.btnEmail = new System.Windows.Forms.Button();
 			this.btnDisks = new System.Windows.Forms.Button();
@@ -57,7 +58,6 @@
 			this.label4 = new System.Windows.Forms.Label();
 			this.txtSendFrom = new System.Windows.Forms.TextBox();
 			this.label3 = new System.Windows.Forms.Label();
-			this.btnSave = new System.Windows.Forms.Button();
 			this.panelHeader.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.panelViewControls.SuspendLayout();
@@ -110,6 +110,16 @@
 			this.panelViewControls.Name = "panelViewControls";
 			this.panelViewControls.Size = new System.Drawing.Size(396, 36);
 			this.panelViewControls.TabIndex = 2;
+			// 
+			// btnSave
+			// 
+			this.btnSave.Location = new System.Drawing.Point(217, 6);
+			this.btnSave.Name = "btnSave";
+			this.btnSave.Size = new System.Drawing.Size(75, 23);
+			this.btnSave.TabIndex = 3;
+			this.btnSave.Text = "Save";
+			this.btnSave.UseVisualStyleBackColor = true;
+			this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
 			// 
 			// btnOptions
 			// 
@@ -179,12 +189,6 @@
 			// 
 			this.cboUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cboUnit.FormattingEnabled = true;
-			this.cboUnit.Items.AddRange(new object[] {
-            "TB",
-            "GB",
-            "MB",
-            "KB",
-            "%"});
 			this.cboUnit.Location = new System.Drawing.Point(252, 204);
 			this.cboUnit.MaxDropDownItems = 3;
 			this.cboUnit.Name = "cboUnit";
@@ -395,16 +399,6 @@
 			this.label3.Size = new System.Drawing.Size(186, 13);
 			this.label3.TabIndex = 2;
 			this.label3.Text = "Alerts are sent from this email address:";
-			// 
-			// btnSave
-			// 
-			this.btnSave.Location = new System.Drawing.Point(217, 6);
-			this.btnSave.Name = "btnSave";
-			this.btnSave.Size = new System.Drawing.Size(75, 23);
-			this.btnSave.TabIndex = 3;
-			this.btnSave.Text = "Save";
-			this.btnSave.UseVisualStyleBackColor = true;
-			this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
 			// 
 			// FrmMain
 			// 

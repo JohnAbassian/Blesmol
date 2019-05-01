@@ -1,5 +1,5 @@
 ﻿namespace Blesmol {
-	partial class Core {
+	partial class Service {
 		/// <summary> 
 		/// Required designer variable.
 		/// </summary>

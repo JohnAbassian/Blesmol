@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using Blesmol;
+using Blesmol.Registry;
 
 namespace Blesmol_Frontend {
 	static class Program {
@@ -11,7 +12,7 @@ namespace Blesmol_Frontend {
 		static void Main() {
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new FrmMain());
+			Application.Run(new FrmMain(new Settings(true)));
 		}
 	}
 }
