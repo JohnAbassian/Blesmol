@@ -12,7 +12,7 @@ namespace Blesmol {
 		private readonly Config c = new Config();
 		private DateTime? _DoNotSendUntilAfter;
 		private Thread _WorkerThread;
-		private readonly List<DriveStatus> AlertingDrives = new List<DriveStatus>();
+		private Dictionary<DriveInfo, DriveStatus> _Drives;
 
 		public Service() {
 			InitializeComponent();
@@ -20,39 +20,45 @@ namespace Blesmol {
 
 		protected override void OnStart(String[] args) {
 			c.LoadConfig();
+			InitializeDrives();
+
 			_WorkerThread = new Thread(new ThreadStart(MonitorDisks)) {
 				Name = "workerThread"
 			};
 			_WorkerThread.Start();
 		}
 
+		private void InitializeDrives() {
+			_Drives = new Dictionary<DriveInfo, DriveStatus>();
+
+			foreach (DriveInfo driveInfo in DriveInfo.GetDrives()) {
+				String name = driveInfo.Name.Replace(@":\", "");
+
+				if (c.DisksToMonitor.Contains(name)) _Drives.Add(driveInfo, new DriveStatus() { DriveName = name });
+			}
+		}
+
 		private void MonitorDisks() {
 			for (; ; ) {
 				if (_DoNotSendUntilAfter == null || DateTime.Now.CompareTo(_DoNotSendUntilAfter) == 1) {
-					DriveInfo[] allDrives = DriveInfo.GetDrives();
-					foreach (DriveInfo driveInfo in allDrives) {
+					foreach ((DriveInfo driveInfo, DriveStatus driveStatus) in _Drives) {
 						try {
-							String driveName = driveInfo.Name.Replace(@":\", "");
-							if (driveInfo.IsReady && c.DisksToMonitor.Contains(driveName) == true) {
-								Boolean alerting = AlertingDrives.Any(x => x.DriveName == driveName);
-								Boolean cleared = false;
+							if (driveInfo.IsReady) {
+								Boolean belowThreshold = CheckBelowThreshold(driveInfo.TotalSize, driveInfo.TotalFreeSpace, c.ThresholdAmount, c.ThresholdUnit);
 
-								if (!ThresholdPassed(driveInfo.TotalSize, driveInfo.TotalFreeSpace, c.ThresholdAmount, c.ThresholdUnit)) {
-									if (!alerting) continue;
-									else cleared = true;
-								}
+								if (!belowThreshold && !driveStatus.Alerting) continue;
 
-								if (!alerting) AlertingDrives.Add(new DriveStatus() { DriveName = driveName, Alerting = true, AlertingStartTime = DateTime.Now });
-								if (cleared) AlertingDrives.Remove(AlertingDrives.FirstOrDefault(x => x.DriveName == driveName));
-								SendAlerts(driveName, c.ThresholdAmount.ToString(), c.ThresholdUnit, AlertingDrives.FirstOrDefault(x => x.DriveName == driveInfo.Name)?.AlertingStartTime ?? DateTime.Now, cleared);
+								driveStatus.Alerting = belowThreshold;
+
+								SendAlerts(driveStatus.DriveName, c.ThresholdAmount.ToString(), c.ThresholdUnit, driveStatus.AlertTime, !driveStatus.Alerting);
 							}
 						} catch { }
 					}
 				}
-				Thread.Sleep(TimeSpan.FromMinutes(AlertingDrives.Any(x => x.Alerting) ? c.EmailDelay : c.SleepInterval));
+				Thread.Sleep(TimeSpan.FromMinutes(_Drives.Any(x => x.Value.Alerting) ? c.EmailDelay : c.SleepInterval));
 			}
 
-			Boolean ThresholdPassed(Int64 driveSize, Int64 freeSpace, Double threshold, Units.Unit unit) {
+			Boolean CheckBelowThreshold(Int64 driveSize, Int64 freeSpace, Double threshold, Units.Unit unit) {
 				if (unit == Units.Unit.Percentage) return freeSpace <= (driveSize * (threshold / 100));
 				else return freeSpace < Units.ConvertToBytes(c.ThresholdAmount, c.ThresholdUnit);
 			}
@@ -80,15 +86,26 @@ namespace Blesmol {
 				subject,
 				text) {
 				IsBodyHtml = true
-			})){
+			})) {
 				mail.Send(message);
 			}
 
 		}
+
 		internal class DriveStatus {
 			public String DriveName { get; set; }
-			public Boolean Alerting { get; set; }
-			public DateTime AlertingStartTime { get; set; }
+
+			private Boolean _Alerting;
+			public Boolean Alerting {
+				get => _Alerting;
+				set {
+					if (value != _Alerting) AlertTime = DateTime.Now;
+
+					_Alerting = value;
+				}
+			}
+
+			public DateTime AlertTime { get; private set; }
 		}
 
 		protected override void OnStop() {
@@ -107,6 +124,13 @@ namespace Blesmol {
 			};
 			ServiceBase.Run(ServicesToRun);
 #endif
+		}
+	}
+
+	internal static class Extensions {
+		internal static void Deconstruct<T1, T2>(this KeyValuePair<T1, T2> tuple, out T1 key, out T2 value) {
+			key = tuple.Key;
+			value = tuple.Value;
 		}
 	}
 }
