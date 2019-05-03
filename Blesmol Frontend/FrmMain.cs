@@ -14,7 +14,7 @@ namespace Blesmol {
 		private readonly Boolean _FormLoaded = false;
 		private readonly ISettings Settings;
 		private Int32 defaultThresholdAmount = 0;
-		private Units.Unit defaultThresholdUnit = default;
+		private Units.Unit defaultThresholdUnit = Units.Unit.GB;
 		private Int32 defaultSleepInterval = 5;
 		private Int32 defaultAlertInterval = 45;
 		private Int32 defaultSmtpServerPort = 25;
@@ -151,7 +151,7 @@ namespace Blesmol {
 			}
 
 			txtAmount.Text = (Settings?.Threshold?.Amount ?? defaultThresholdAmount).ToString();
-			cboUnit.SelectedValue = Settings.Threshold?.Unit ?? defaultThresholdUnit;
+			cboUnit.SelectedValue = Settings.Threshold?.Unit != null && Settings.Threshold.Unit != default ? Settings.Threshold.Unit : defaultThresholdUnit;
 
 			txtMachineName.Text = coalesceString(Settings?.Email?.MachineName) ?? System.Windows.Forms.SystemInformation.ComputerName;
 			txtSmtpServer.Text = coalesceString(Settings?.Email?.SmtpServer) ?? "127.0.0.1";
