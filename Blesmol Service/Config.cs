@@ -6,7 +6,7 @@ using Blesmol.Registry;
 
 namespace Blesmol {
 	public class Config {
-		private ISettings Settings = new Settings(true);
+		private ISettings Settings = new Settings();
 		public String[] EmailAddresses;
 		public ArrayList DisksToMonitor = new ArrayList();
 		public Int32 ThresholdAmount;
@@ -25,6 +25,8 @@ namespace Blesmol {
 
 		public void LoadConfig() {
 			try {
+				Settings.Load();
+
 				foreach (String k in Settings.Disks.Disks) {
 					DisksToMonitor.Add(k);
 				}
