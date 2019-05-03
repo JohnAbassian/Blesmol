@@ -1,23 +1,28 @@
 ﻿using System;
 
 namespace Blesmol.Core {
-	public interface ISettings {
+	public interface ISettingsLifecycle {
+		void Load();
+		void Save();
+	}
+
+	public interface ISettings : ISettingsLifecycle {
 		IDiskSettings Disks { get; }
 		IThresholdSettings Threshold { get; }
 		IEmailSettings Email { get; }
 		IIntervalSettings Intervals { get; }
 	}
 
-	public interface IDiskSettings {
+	public interface IDiskSettings : ISettingsLifecycle {
 		String[] Disks { get; set; }
 	}
 
-	public interface IThresholdSettings {
+	public interface IThresholdSettings : ISettingsLifecycle {
 		Int32? Amount { get; set; }
 		Units.Unit Unit { get; set; }
 	}
 
-	public interface IEmailSettings {
+	public interface IEmailSettings : ISettingsLifecycle {
 		String MachineName { get; set; }
 		String SmtpServer {get;set;}
 		String SmtpServerUsername {get;set;}
@@ -27,7 +32,7 @@ namespace Blesmol.Core {
 		String EmailAddresses { get; set; }
 	}
 
-	public interface IIntervalSettings {
+	public interface IIntervalSettings : ISettingsLifecycle {
 		Int32? Sleep { get; set; }
 		Int32? Alert { get; set; }
 	}

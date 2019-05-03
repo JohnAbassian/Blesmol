@@ -95,6 +95,10 @@ namespace Blesmol {
 			SaveThresholdSettings();
 			SaveEmailSettings();
 			SaveIntervalSettings();
+
+			Settings.Save();
+
+			RestartService();
 		}
 
 		private void SaveDiskSettings() {
@@ -136,6 +140,8 @@ namespace Blesmol {
 		}
 
 		private void LoadSettings() {
+			Settings.Load();
+
 			if (Settings?.Disks?.Disks != null) {
 				foreach (String k in Settings.Disks.Disks) {
 					if (clbDisks.FindString(k + ":") > -1) {
@@ -211,7 +217,6 @@ namespace Blesmol {
 
 		private void FrmMain_FormClosed(object sender, FormClosedEventArgs e) {
 			SaveAllSettings();
-			RestartService();
 		}
 
 		private void clbDisks_SelectedValueChanged(object sender, EventArgs e) {
@@ -260,7 +265,6 @@ namespace Blesmol {
 
 		private void BtnSave_Click(Object sender, EventArgs e) {
 			SaveAllSettings();
-			RestartService();
 		}
 	}
 }
