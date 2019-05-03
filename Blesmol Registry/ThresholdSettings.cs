@@ -7,7 +7,7 @@ namespace Blesmol.Registry {
 
 		private readonly ISetting Amount;
 		Int32? IThresholdSettings.Amount {
-			get => (Int32)Amount.Value;
+			get => (Int32?)Amount.Value;
 			set => Amount.Value = value;
 		}
 
