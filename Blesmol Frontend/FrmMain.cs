@@ -178,13 +178,19 @@ namespace Blesmol {
 				controller.ServiceName = "Blesmol";
 				String status = controller.Status.ToString();
 
-				if (controller.Status == System.ServiceProcess.ServiceControllerStatus.Running) {
-					controller.Stop();
-					Thread.Sleep(1500);
+				if (controller.Status == System.ServiceProcess.ServiceControllerStatus.Stopped) {
 					if (clbDisks.CheckedItems.Count > 0) {
 						controller.Start();
 					}
 				}
+
+				//if (controller.Status == System.ServiceProcess.ServiceControllerStatus.Running) {
+				//	controller.Stop();
+				//	Thread.Sleep(1500);
+				//	if (clbDisks.CheckedItems.Count > 0) {
+				//		controller.Start();
+				//	}
+				//}
 			} catch { }
 		}
 
