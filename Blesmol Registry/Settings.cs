@@ -1,16 +1,14 @@
 ﻿using Blesmol.Core;
 using System;
-using System.Security.AccessControl;
 using System.Threading;
 using System.Threading.Tasks;
 using Win32 = Microsoft.Win32;
 
 namespace Blesmol.Registry {
 	public class Settings : SettingsBase, ISettings {
-		private const String EventName = @"Global\Blesmol.Registry.Settings.Change";
+		private const String EventName = "Blesmol.Registry.Settings.Change";
 		private EventWaitHandle _Event;
 		private EventWaitHandle Event => _Event ?? (_Event = EventWaitHandle.TryOpenExisting(EventName, out EventWaitHandle @event) ? @event : new EventWaitHandle(false, EventResetMode.AutoReset, EventName));
-		// EventWaitHandleRights.Synchronize | EventWaitHandleRights.Modify
 
 		protected override String Path => @"Software\Abassian.net\Blesmol";
 
