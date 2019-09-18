@@ -25,9 +25,11 @@
 		private void InitializeComponent() {
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
 			this.panelHeader = new System.Windows.Forms.Panel();
+			this.btnProblems = new System.Windows.Forms.Button();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.labelTitle = new System.Windows.Forms.Label();
 			this.panelViewControls = new System.Windows.Forms.Panel();
+			this.btnSettings = new System.Windows.Forms.Button();
 			this.btnSave = new System.Windows.Forms.Button();
 			this.btnOptions = new System.Windows.Forms.Button();
 			this.btnEmail = new System.Windows.Forms.Button();
@@ -58,12 +60,25 @@
 			this.label4 = new System.Windows.Forms.Label();
 			this.txtSendFrom = new System.Windows.Forms.TextBox();
 			this.label3 = new System.Windows.Forms.Label();
+			this.panelErrors = new System.Windows.Forms.Panel();
+			this.btnDeleteLog = new System.Windows.Forms.Button();
+			this.dataGridErrors = new System.Windows.Forms.DataGridView();
+			this.ErrorsLoggged = new System.Windows.Forms.Label();
+			this.pnlSettings = new System.Windows.Forms.Panel();
+			this.txtLogPath = new System.Windows.Forms.TextBox();
+			this.label19 = new System.Windows.Forms.Label();
+			this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+			this.label11 = new System.Windows.Forms.Label();
+			this.txtMaximumLogSize = new System.Windows.Forms.TextBox();
 			this.panelHeader.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.panelViewControls.SuspendLayout();
 			this.panelDisks.SuspendLayout();
 			this.panelEmail.SuspendLayout();
 			this.panelOptions.SuspendLayout();
+			this.panelErrors.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dataGridErrors)).BeginInit();
+			this.pnlSettings.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// panelHeader
@@ -71,12 +86,29 @@
 			this.panelHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.panelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(67)))), ((int)(((byte)(70)))));
+			this.panelHeader.Controls.Add(this.btnProblems);
 			this.panelHeader.Controls.Add(this.pictureBox1);
 			this.panelHeader.Controls.Add(this.labelTitle);
 			this.panelHeader.Location = new System.Drawing.Point(0, 0);
 			this.panelHeader.Name = "panelHeader";
-			this.panelHeader.Size = new System.Drawing.Size(1228, 47);
+			this.panelHeader.Size = new System.Drawing.Size(1887, 47);
 			this.panelHeader.TabIndex = 1;
+			// 
+			// btnProblems
+			// 
+			this.btnProblems.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnProblems.ForeColor = System.Drawing.Color.Red;
+			this.btnProblems.Image = global::Blesmol.Properties.Resources.fd1fdd9c8a8d44e1ee900fb1f9830aaf_32bits_48;
+			this.btnProblems.Location = new System.Drawing.Point(300, 1);
+			this.btnProblems.Margin = new System.Windows.Forms.Padding(0);
+			this.btnProblems.Name = "btnProblems";
+			this.btnProblems.Size = new System.Drawing.Size(94, 46);
+			this.btnProblems.TabIndex = 4;
+			this.btnProblems.Text = "1";
+			this.btnProblems.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.btnProblems.UseVisualStyleBackColor = true;
+			this.btnProblems.Visible = false;
+			this.btnProblems.Click += new System.EventHandler(this.btnErrors_Click);
 			// 
 			// pictureBox1
 			// 
@@ -102,6 +134,7 @@
 			// panelViewControls
 			// 
 			this.panelViewControls.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(161)))), ((int)(((byte)(161)))), ((int)(((byte)(161)))));
+			this.panelViewControls.Controls.Add(this.btnSettings);
 			this.panelViewControls.Controls.Add(this.btnSave);
 			this.panelViewControls.Controls.Add(this.btnOptions);
 			this.panelViewControls.Controls.Add(this.btnEmail);
@@ -111,9 +144,19 @@
 			this.panelViewControls.Size = new System.Drawing.Size(396, 36);
 			this.panelViewControls.TabIndex = 2;
 			// 
+			// btnSettings
+			// 
+			this.btnSettings.Location = new System.Drawing.Point(218, 6);
+			this.btnSettings.Name = "btnSettings";
+			this.btnSettings.Size = new System.Drawing.Size(63, 23);
+			this.btnSettings.TabIndex = 4;
+			this.btnSettings.Text = "Settings";
+			this.btnSettings.UseVisualStyleBackColor = true;
+			this.btnSettings.Click += new System.EventHandler(this.BtnSettings_Click);
+			// 
 			// btnSave
 			// 
-			this.btnSave.Location = new System.Drawing.Point(217, 6);
+			this.btnSave.Location = new System.Drawing.Point(311, 6);
 			this.btnSave.Name = "btnSave";
 			this.btnSave.Size = new System.Drawing.Size(75, 23);
 			this.btnSave.TabIndex = 3;
@@ -127,7 +170,7 @@
 			this.btnOptions.Name = "btnOptions";
 			this.btnOptions.Size = new System.Drawing.Size(63, 23);
 			this.btnOptions.TabIndex = 2;
-			this.btnOptions.Text = "Options";
+			this.btnOptions.Text = "SMTP";
 			this.btnOptions.UseVisualStyleBackColor = true;
 			this.btnOptions.Click += new System.EventHandler(this.btnOptions_Click);
 			// 
@@ -159,7 +202,7 @@
 			this.panelDisks.Controls.Add(this.label1);
 			this.panelDisks.Location = new System.Drawing.Point(-2, 83);
 			this.panelDisks.Name = "panelDisks";
-			this.panelDisks.Size = new System.Drawing.Size(306, 239);
+			this.panelDisks.Size = new System.Drawing.Size(396, 239);
 			this.panelDisks.TabIndex = 3;
 			// 
 			// txtAmount
@@ -180,7 +223,7 @@
 			this.clbDisks.Location = new System.Drawing.Point(11, 10);
 			this.clbDisks.Name = "clbDisks";
 			this.clbDisks.ScrollAlwaysVisible = true;
-			this.clbDisks.Size = new System.Drawing.Size(285, 179);
+			this.clbDisks.Size = new System.Drawing.Size(375, 179);
 			this.clbDisks.TabIndex = 3;
 			this.clbDisks.Click += new System.EventHandler(this.btnDisks_Click);
 			this.clbDisks.SelectedValueChanged += new System.EventHandler(this.clbDisks_SelectedValueChanged);
@@ -209,9 +252,9 @@
 			// 
 			this.panelEmail.Controls.Add(this.txtEmails);
 			this.panelEmail.Controls.Add(this.label2);
-			this.panelEmail.Location = new System.Drawing.Point(615, 83);
+			this.panelEmail.Location = new System.Drawing.Point(429, 64);
 			this.panelEmail.Name = "panelEmail";
-			this.panelEmail.Size = new System.Drawing.Size(306, 189);
+			this.panelEmail.Size = new System.Drawing.Size(396, 189);
 			this.panelEmail.TabIndex = 6;
 			// 
 			// txtEmails
@@ -219,7 +262,7 @@
 			this.txtEmails.Location = new System.Drawing.Point(13, 25);
 			this.txtEmails.Multiline = true;
 			this.txtEmails.Name = "txtEmails";
-			this.txtEmails.Size = new System.Drawing.Size(280, 146);
+			this.txtEmails.Size = new System.Drawing.Size(380, 146);
 			this.txtEmails.TabIndex = 2;
 			// 
 			// label2
@@ -250,9 +293,9 @@
 			this.panelOptions.Controls.Add(this.label4);
 			this.panelOptions.Controls.Add(this.txtSendFrom);
 			this.panelOptions.Controls.Add(this.label3);
-			this.panelOptions.Location = new System.Drawing.Point(628, 358);
+			this.panelOptions.Location = new System.Drawing.Point(832, 64);
 			this.panelOptions.Name = "panelOptions";
-			this.panelOptions.Size = new System.Drawing.Size(306, 239);
+			this.panelOptions.Size = new System.Drawing.Size(396, 239);
 			this.panelOptions.TabIndex = 7;
 			// 
 			// lblSleepInterval
@@ -400,11 +443,96 @@
 			this.label3.TabIndex = 2;
 			this.label3.Text = "Alerts are sent from this email address:";
 			// 
+			// panelErrors
+			// 
+			this.panelErrors.Controls.Add(this.btnDeleteLog);
+			this.panelErrors.Controls.Add(this.dataGridErrors);
+			this.panelErrors.Controls.Add(this.ErrorsLoggged);
+			this.panelErrors.Location = new System.Drawing.Point(12, 346);
+			this.panelErrors.Name = "panelErrors";
+			this.panelErrors.Size = new System.Drawing.Size(396, 214);
+			this.panelErrors.TabIndex = 7;
+			// 
+			// btnDeleteLog
+			// 
+			this.btnDeleteLog.Location = new System.Drawing.Point(319, 181);
+			this.btnDeleteLog.Name = "btnDeleteLog";
+			this.btnDeleteLog.Size = new System.Drawing.Size(63, 23);
+			this.btnDeleteLog.TabIndex = 5;
+			this.btnDeleteLog.Text = "Clear Log";
+			this.btnDeleteLog.UseVisualStyleBackColor = true;
+			this.btnDeleteLog.Click += new System.EventHandler(this.BtnDeleteLog_Click);
+			// 
+			// dataGridErrors
+			// 
+			this.dataGridErrors.AllowUserToAddRows = false;
+			this.dataGridErrors.AllowUserToDeleteRows = false;
+			this.dataGridErrors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dataGridErrors.Location = new System.Drawing.Point(12, 24);
+			this.dataGridErrors.Name = "dataGridErrors";
+			this.dataGridErrors.ReadOnly = true;
+			this.dataGridErrors.Size = new System.Drawing.Size(370, 151);
+			this.dataGridErrors.TabIndex = 2;
+			// 
+			// ErrorsLoggged
+			// 
+			this.ErrorsLoggged.AutoSize = true;
+			this.ErrorsLoggged.Location = new System.Drawing.Point(9, 8);
+			this.ErrorsLoggged.Name = "ErrorsLoggged";
+			this.ErrorsLoggged.Size = new System.Drawing.Size(88, 13);
+			this.ErrorsLoggged.TabIndex = 1;
+			this.ErrorsLoggged.Text = "Problems logged:";
+			// 
+			// pnlSettings
+			// 
+			this.pnlSettings.Controls.Add(this.txtMaximumLogSize);
+			this.pnlSettings.Controls.Add(this.label11);
+			this.pnlSettings.Controls.Add(this.txtLogPath);
+			this.pnlSettings.Controls.Add(this.label19);
+			this.pnlSettings.Location = new System.Drawing.Point(426, 310);
+			this.pnlSettings.Name = "pnlSettings";
+			this.pnlSettings.Size = new System.Drawing.Size(396, 239);
+			this.pnlSettings.TabIndex = 20;
+			// 
+			// txtLogPath
+			// 
+			this.txtLogPath.Location = new System.Drawing.Point(12, 26);
+			this.txtLogPath.Name = "txtLogPath";
+			this.txtLogPath.Size = new System.Drawing.Size(237, 20);
+			this.txtLogPath.TabIndex = 7;
+			// 
+			// label19
+			// 
+			this.label19.AutoSize = true;
+			this.label19.Location = new System.Drawing.Point(9, 10);
+			this.label19.Name = "label19";
+			this.label19.Size = new System.Drawing.Size(112, 13);
+			this.label19.TabIndex = 2;
+			this.label19.Text = "Path to Log files folder";
+			// 
+			// label11
+			// 
+			this.label11.AutoSize = true;
+			this.label11.Location = new System.Drawing.Point(256, 10);
+			this.label11.Name = "label11";
+			this.label11.Size = new System.Drawing.Size(89, 13);
+			this.label11.TabIndex = 8;
+			this.label11.Text = "Maximum log size";
+			// 
+			// txtMaximumLogSize
+			// 
+			this.txtMaximumLogSize.Location = new System.Drawing.Point(260, 26);
+			this.txtMaximumLogSize.Name = "txtMaximumLogSize";
+			this.txtMaximumLogSize.Size = new System.Drawing.Size(85, 20);
+			this.txtMaximumLogSize.TabIndex = 9;
+			// 
 			// FrmMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1228, 670);
+			this.ClientSize = new System.Drawing.Size(1887, 931);
+			this.Controls.Add(this.pnlSettings);
+			this.Controls.Add(this.panelErrors);
 			this.Controls.Add(this.panelOptions);
 			this.Controls.Add(this.panelEmail);
 			this.Controls.Add(this.panelDisks);
@@ -428,6 +556,11 @@
 			this.panelEmail.PerformLayout();
 			this.panelOptions.ResumeLayout(false);
 			this.panelOptions.PerformLayout();
+			this.panelErrors.ResumeLayout(false);
+			this.panelErrors.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dataGridErrors)).EndInit();
+			this.pnlSettings.ResumeLayout(false);
+			this.pnlSettings.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -468,6 +601,18 @@
 		private System.Windows.Forms.PictureBox pictureBox1;
 		private System.Windows.Forms.TextBox txtEmails;
 		private System.Windows.Forms.Button btnSave;
+		private System.Windows.Forms.Button btnProblems;
+		private System.Windows.Forms.Panel panelErrors;
+		private System.Windows.Forms.Label ErrorsLoggged;
+		private System.Windows.Forms.Button btnSettings;
+		private System.Windows.Forms.Panel pnlSettings;
+		private System.Windows.Forms.TextBox txtLogPath;
+		private System.Windows.Forms.Label label19;
+		private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+		private System.Windows.Forms.DataGridView dataGridErrors;
+		private System.Windows.Forms.Button btnDeleteLog;
+		private System.Windows.Forms.TextBox txtMaximumLogSize;
+		private System.Windows.Forms.Label label11;
 	}
 }
 

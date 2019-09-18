@@ -59,5 +59,15 @@ namespace Blesmol.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap fd1fdd9c8a8d44e1ee900fb1f9830aaf_32bits_48 {
+            get {
+                object obj = ResourceManager.GetObject("fd1fdd9c8a8d44e1ee900fb1f9830aaf-32bits-48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

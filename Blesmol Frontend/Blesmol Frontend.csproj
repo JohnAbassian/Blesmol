@@ -69,6 +69,9 @@
     <Reference Include="Microsoft.Win32.Registry, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Win32.Registry.4.5.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -147,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="blesmol.ico" />
+    <None Include="Resources\fd1fdd9c8a8d44e1ee900fb1f9830aaf-32bits-48.png" />
   </ItemGroup>
   <ItemGroup>
     <PublishFile Include="Blesmol.exe.config">
@@ -174,6 +178,10 @@
     <ProjectReference Include="..\Blesmol Core\Blesmol Core.csproj">
       <Project>{edba83ab-f842-43de-8ff8-a2b5bad3cf92}</Project>
       <Name>Blesmol Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Blesmol FileSystem\Blesmol FileSystem.csproj">
+      <Project>{2F66C40F-75B3-478E-BA07-C44C7275CFEC}</Project>
+      <Name>Blesmol FileSystem</Name>
     </ProjectReference>
     <ProjectReference Include="..\Blesmol Registry\Blesmol Registry.csproj">
       <Project>{af2f29d1-6487-4aa3-9873-9e1486adaec2}</Project>

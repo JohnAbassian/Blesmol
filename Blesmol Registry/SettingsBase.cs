@@ -2,7 +2,6 @@
 using System;
 using Blesmol.Core;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Blesmol.Registry {
 	public abstract class SettingsBase : ISettingsLifecycle {
@@ -15,7 +14,7 @@ namespace Blesmol.Registry {
 		protected abstract String Path { get; }
 
 		protected void AddSetting<T>(String name, out ISetting setting) {
-			setting = Setting<T>.Build<T>(name);
+			setting = Setting<T>.Build(name);
 			Settings.Add(setting);
 		}
 
@@ -30,8 +29,6 @@ namespace Blesmol.Registry {
 		private void OpenCloseRegistry(Action<Win32.RegistryKey> action) {
 			using (Win32.RegistryKey key = GetKey(FullPath)) {
 				action(key);
-
-				key.Close();
 			}
 		}
 
@@ -75,7 +72,7 @@ namespace Blesmol.Registry {
 				{ typeof(Int32?), name => new Int32NSetting(name) },
 				{ typeof(Units.Unit), name => new UnitSetting(name) }
 			};
-			internal static ISetting Build<T>(String name) => TypeMap.TryGetValue(typeof(T), out Builder builder) ? builder(name) : throw new NotSupportedException($"type {typeof(T).Name} does not have a Settings<T> implementation.");
+			internal static ISetting Build(String name) => TypeMap.TryGetValue(typeof(T), out Builder builder) ? builder(name) : throw new NotSupportedException($"type {typeof(T).Name} does not have a Settings<T> implementation.");
 		}
 
 		protected class StringSetting : Setting<String> {

@@ -10,12 +10,14 @@ namespace Blesmol.Registry {
 		public IThresholdSettings Threshold { get; }
 		public IEmailSettings Email { get; }
 		public IIntervalSettings Intervals { get; }
+		public IFileSystemLogSettings FileSystemLog { get;}
 
 		protected override void Load(Win32.RegistryKey key) {
 			Disks.Load();
 			Threshold.Load();
 			Email.Load();
 			Intervals.Load();
+			FileSystemLog.Load();
 		}
 
 		protected override void Save(Win32.RegistryKey key) {
@@ -23,6 +25,7 @@ namespace Blesmol.Registry {
 			Threshold.Save();
 			Email.Save();
 			Intervals.Save();
+			FileSystemLog.Save();
 		}
 
 		public Settings(Boolean writeable = false) : base(writeable) {
@@ -30,6 +33,7 @@ namespace Blesmol.Registry {
 			Threshold = new ThresholdSettings(this);
 			Email = new EmailSettings(this);
 			Intervals = new IntervalSettings(this);
+			FileSystemLog = new FileSystemPathSettings(this);
 		}
 	}
 }

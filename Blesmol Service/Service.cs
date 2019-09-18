@@ -6,6 +6,8 @@ using System.Net.Mail;
 using System.ServiceProcess;
 using System.Threading;
 using Blesmol.Core;
+using Blesmol_FileSystem;
+using Blesmol_SMTP;
 
 namespace Blesmol {
 	public partial class Service : ServiceBase {
@@ -67,6 +69,7 @@ namespace Blesmol {
 		private void SendAlerts(String drive, String thresholdAmount, Units.Unit thresholdUnit, DateTime eventTime, Boolean cleared) {
 			_DoNotSendUntilAfter = DateTime.Now.AddMinutes(c.EmailDelay);
 
+
 			SmtpClient mail = new SmtpClient(c.SmtpServer, Convert.ToInt32(c.SmtpServerPort)) {
 				UseDefaultCredentials = false,
 				Credentials = new System.Net.NetworkCredential(c.SmtpServerUsername, c.SmtpServerPassword),
@@ -82,14 +85,20 @@ namespace Blesmol {
 
 			String subject = cleared ? "Disk space is no longer low on " + drive + " on " + c.MachineName : "Warning! Disk space is low on " + drive + " on " + c.MachineName;
 
-			foreach (MailMessage message in c.EmailAddresses.Select(email => new MailMessage("alerts@reliant.org", email,
-				subject,
-				text) {
-				IsBodyHtml = true
-			})) {
-				mail.Send(message);
-			}
+			//foreach (MailMessage message in c.EmailAddresses.Select(email => new MailMessage("alerts@reliant.org", email,
+			//	subject,
+			//	text) {
+			//	IsBodyHtml = true
+			//})) {
+			//	mail.Send(message);
+			//}
 
+			try {
+				new BlesmolSMTPNotifier(new SMTPSettings(){Server = c.SmtpServer, Port = c.SmtpServerPort, Username = c.SmtpServerUsername, Password = c.SmtpServerPassword, UseSSLTLS = true}, c.EmailAddresses.ToList(), text, subject).Notify();
+			} catch (Exception e) {
+				FileLogger logger = new FileLogger();
+				logger.Log(e, DateTime.Now);
+			}
 		}
 
 		internal class DriveStatus {
