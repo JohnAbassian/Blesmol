@@ -65,11 +65,11 @@
 			this.dataGridErrors = new System.Windows.Forms.DataGridView();
 			this.ErrorsLoggged = new System.Windows.Forms.Label();
 			this.pnlSettings = new System.Windows.Forms.Panel();
+			this.txtMaximumLogSize = new System.Windows.Forms.TextBox();
+			this.label11 = new System.Windows.Forms.Label();
 			this.txtLogPath = new System.Windows.Forms.TextBox();
 			this.label19 = new System.Windows.Forms.Label();
 			this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-			this.label11 = new System.Windows.Forms.Label();
-			this.txtMaximumLogSize = new System.Windows.Forms.TextBox();
 			this.panelHeader.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.panelViewControls.SuspendLayout();
@@ -85,7 +85,7 @@
 			// 
 			this.panelHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.panelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(67)))), ((int)(((byte)(70)))));
+			this.panelHeader.BackColor = System.Drawing.Color.Black;
 			this.panelHeader.Controls.Add(this.btnProblems);
 			this.panelHeader.Controls.Add(this.pictureBox1);
 			this.panelHeader.Controls.Add(this.labelTitle);
@@ -124,7 +124,7 @@
 			// 
 			this.labelTitle.AutoSize = true;
 			this.labelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.labelTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(201)))), ((int)(((byte)(227)))));
+			this.labelTitle.ForeColor = System.Drawing.Color.White;
 			this.labelTitle.Location = new System.Drawing.Point(56, 12);
 			this.labelTitle.Name = "labelTitle";
 			this.labelTitle.Size = new System.Drawing.Size(238, 24);
@@ -494,6 +494,22 @@
 			this.pnlSettings.Size = new System.Drawing.Size(396, 239);
 			this.pnlSettings.TabIndex = 20;
 			// 
+			// txtMaximumLogSize
+			// 
+			this.txtMaximumLogSize.Location = new System.Drawing.Point(260, 26);
+			this.txtMaximumLogSize.Name = "txtMaximumLogSize";
+			this.txtMaximumLogSize.Size = new System.Drawing.Size(85, 20);
+			this.txtMaximumLogSize.TabIndex = 9;
+			// 
+			// label11
+			// 
+			this.label11.AutoSize = true;
+			this.label11.Location = new System.Drawing.Point(256, 10);
+			this.label11.Name = "label11";
+			this.label11.Size = new System.Drawing.Size(89, 13);
+			this.label11.TabIndex = 8;
+			this.label11.Text = "Maximum log size";
+			// 
 			// txtLogPath
 			// 
 			this.txtLogPath.Location = new System.Drawing.Point(12, 26);
@@ -509,22 +525,6 @@
 			this.label19.Size = new System.Drawing.Size(112, 13);
 			this.label19.TabIndex = 2;
 			this.label19.Text = "Path to Log files folder";
-			// 
-			// label11
-			// 
-			this.label11.AutoSize = true;
-			this.label11.Location = new System.Drawing.Point(256, 10);
-			this.label11.Name = "label11";
-			this.label11.Size = new System.Drawing.Size(89, 13);
-			this.label11.TabIndex = 8;
-			this.label11.Text = "Maximum log size";
-			// 
-			// txtMaximumLogSize
-			// 
-			this.txtMaximumLogSize.Location = new System.Drawing.Point(260, 26);
-			this.txtMaximumLogSize.Name = "txtMaximumLogSize";
-			this.txtMaximumLogSize.Size = new System.Drawing.Size(85, 20);
-			this.txtMaximumLogSize.TabIndex = 9;
 			// 
 			// FrmMain
 			// 

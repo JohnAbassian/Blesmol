@@ -27,6 +27,24 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_1FE801C7E76C09DCA6DA844E77104F4D"
+        "OwnerKey" = "8:_994C01581DA95081824A0EA4A5E5A82C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_1FE801C7E76C09DCA6DA844E77104F4D"
+        "OwnerKey" = "8:_EE0B25CC46514DB2BF751A9398B1A42D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_1FE801C7E76C09DCA6DA844E77104F4D"
+        "OwnerKey" = "8:_9E82699D6C47455B9B6549E78C9A1CB6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_29A0455695A047E88A7BF75D4D2C9945"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -34,7 +52,7 @@
         "Entry"
         {
         "MsmKey" = "8:_2DFB3A3A47279D33A70314B7507C65DF"
-        "OwnerKey" = "8:_9E82699D6C47455B9B6549E78C9A1CB6"
+        "OwnerKey" = "8:_1FE801C7E76C09DCA6DA844E77104F4D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -45,6 +63,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_2DFB3A3A47279D33A70314B7507C65DF"
+        "OwnerKey" = "8:_9E82699D6C47455B9B6549E78C9A1CB6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_43D0EFE4BD96A6D81A7BE2110430599E"
         "OwnerKey" = "8:_9E82699D6C47455B9B6549E78C9A1CB6"
         "MsmSig" = "8:_UNDEFINED"
@@ -52,13 +76,31 @@
         "Entry"
         {
         "MsmKey" = "8:_43D0EFE4BD96A6D81A7BE2110430599E"
-        "OwnerKey" = "8:_EE0B25CC46514DB2BF751A9398B1A42D"
+        "OwnerKey" = "8:_A5433D69370B4CE00FADEC88C146BCFB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_43D0EFE4BD96A6D81A7BE2110430599E"
-        "OwnerKey" = "8:_EF26C59286FCF595C850C7E18D426CB8"
+        "OwnerKey" = "8:_1FE801C7E76C09DCA6DA844E77104F4D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_43D0EFE4BD96A6D81A7BE2110430599E"
+        "OwnerKey" = "8:_994C01581DA95081824A0EA4A5E5A82C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_43D0EFE4BD96A6D81A7BE2110430599E"
+        "OwnerKey" = "8:_FEBC09F7434CC115493F15AE0325B1FC"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_43D0EFE4BD96A6D81A7BE2110430599E"
+        "OwnerKey" = "8:_EE0B25CC46514DB2BF751A9398B1A42D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -77,6 +119,18 @@
         {
         "MsmKey" = "8:_4F62C8E824AF147CB0945F4290F892E2"
         "OwnerKey" = "8:_43D0EFE4BD96A6D81A7BE2110430599E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_994C01581DA95081824A0EA4A5E5A82C"
+        "OwnerKey" = "8:_9E82699D6C47455B9B6549E78C9A1CB6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_994C01581DA95081824A0EA4A5E5A82C"
+        "OwnerKey" = "8:_EE0B25CC46514DB2BF751A9398B1A42D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -105,6 +159,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_A5433D69370B4CE00FADEC88C146BCFB"
+        "OwnerKey" = "8:_9E82699D6C47455B9B6549E78C9A1CB6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_C7126511343A61C7912D1025D33250E6"
         "OwnerKey" = "8:_43D0EFE4BD96A6D81A7BE2110430599E"
         "MsmSig" = "8:_UNDEFINED"
@@ -117,20 +177,56 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_EF26C59286FCF595C850C7E18D426CB8"
+        "MsmKey" = "8:_F9252DDA3CE763669700194471D18B66"
+        "OwnerKey" = "8:_EE0B25CC46514DB2BF751A9398B1A42D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F9252DDA3CE763669700194471D18B66"
+        "OwnerKey" = "8:_994C01581DA95081824A0EA4A5E5A82C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FEBC09F7434CC115493F15AE0325B1FC"
         "OwnerKey" = "8:_9E82699D6C47455B9B6549E78C9A1CB6"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_EF26C59286FCF595C850C7E18D426CB8"
+        "MsmKey" = "8:_FEBC09F7434CC115493F15AE0325B1FC"
         "OwnerKey" = "8:_EE0B25CC46514DB2BF751A9398B1A42D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FEBC09F7434CC115493F15AE0325B1FC"
+        "OwnerKey" = "8:_A5433D69370B4CE00FADEC88C146BCFB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FEBC09F7434CC115493F15AE0325B1FC"
+        "OwnerKey" = "8:_1FE801C7E76C09DCA6DA844E77104F4D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FEBC09F7434CC115493F15AE0325B1FC"
+        "OwnerKey" = "8:_994C01581DA95081824A0EA4A5E5A82C"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_EE0B25CC46514DB2BF751A9398B1A42D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_F9252DDA3CE763669700194471D18B66"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -341,6 +437,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_1FE801C7E76C09DCA6DA844E77104F4D"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Blesmol Registry, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_1FE801C7E76C09DCA6DA844E77104F4D"
+                    {
+                    "Name" = "8:Blesmol Registry.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Blesmol Registry.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_730D0CAAC00844529C311A965F6F9357"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_29A0455695A047E88A7BF75D4D2C9945"
             {
             "SourcePath" = "8:..\\blesmol.ico"
@@ -485,6 +612,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_994C01581DA95081824A0EA4A5E5A82C"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Blesmol FileSystem, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_994C01581DA95081824A0EA4A5E5A82C"
+                    {
+                    "Name" = "8:Blesmol FileSystem.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Blesmol FileSystem.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_730D0CAAC00844529C311A965F6F9357"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9D36F1B7C8F0AF6359A302F6820D216F"
             {
             "AssemblyRegister" = "3:1"
@@ -547,6 +705,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A5433D69370B4CE00FADEC88C146BCFB"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Blesmol SMTP, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_A5433D69370B4CE00FADEC88C146BCFB"
+                    {
+                    "Name" = "8:Blesmol SMTP.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Blesmol SMTP.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_730D0CAAC00844529C311A965F6F9357"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C7126511343A61C7912D1025D33250E6"
             {
             "AssemblyRegister" = "3:1"
@@ -578,14 +767,45 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_EF26C59286FCF595C850C7E18D426CB8"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F9252DDA3CE763669700194471D18B66"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_F9252DDA3CE763669700194471D18B66"
+                    {
+                    "Name" = "8:Newtonsoft.Json.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Newtonsoft.Json.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_730D0CAAC00844529C311A965F6F9357"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_FEBC09F7434CC115493F15AE0325B1FC"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:Blesmol Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_EF26C59286FCF595C850C7E18D426CB8"
+                    "_FEBC09F7434CC115493F15AE0325B1FC"
                     {
                     "Name" = "8:Blesmol Core.dll"
                     "Attributes" = "3:512"
@@ -628,7 +848,7 @@
             }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_730D0CAAC00844529C311A965F6F9357"
             {
-            "DefaultLocation" = "8:[ProgramFilesFolder][Manufacturer]\\[ProductName]"
+            "DefaultLocation" = "8:[ProgramFiles64Folder][Manufacturer]\\[ProductName]"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -666,7 +886,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Blesmol Storage Monitor"
         "ProductCode" = "8:{3ED882B3-4119-48A6-A751-D4F43054EB7C}"
-        "PackageCode" = "8:{D545D7B0-5B6C-49D3-B9EA-8F4910623A7F}"
+        "PackageCode" = "8:{F685C5C2-9153-46AC-91A7-8EF42F21A8EF}"
         "UpgradeCode" = "8:{933E8D9C-A303-464A-85BD-CFAF1532C16F}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -687,7 +907,7 @@
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
-        "TargetPlatform" = "3:0"
+        "TargetPlatform" = "3:1"
         "PreBuildEvent" = "8:"
         "PostBuildEvent" = "8:"
         "RunPostBuildEvent" = "3:0"

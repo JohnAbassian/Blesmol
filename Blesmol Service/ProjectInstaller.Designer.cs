@@ -1,4 +1,6 @@
-﻿namespace Blesmol {
+﻿using System.Collections;
+
+namespace Blesmol {
 	partial class ProjectInstaller {
 		/// <summary>
 		/// Required designer variable.
@@ -24,6 +26,7 @@
 		/// </summary>
 		private void InitializeComponent() {
 			this.serviceProcessInstaller1 = new System.ServiceProcess.ServiceProcessInstaller();
+			
 			this.serviceInstaller1 = new System.ServiceProcess.ServiceInstaller();
 			// 
 			// serviceProcessInstaller1
@@ -48,6 +51,10 @@
 		}
 
 		#endregion
+
+		public override void Uninstall(IDictionary savedState) {
+			base.Uninstall(savedState);
+		}
 
 		private System.ServiceProcess.ServiceProcessInstaller serviceProcessInstaller1;
 		private System.ServiceProcess.ServiceInstaller serviceInstaller1;
